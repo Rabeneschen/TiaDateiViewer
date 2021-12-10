@@ -1,0 +1,74 @@
+﻿<UserControl x:Class="TiaFileViewer.View.FileViewerView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="900"
+             DataContext="{StaticResource SharedFileViewerViewModel}">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/TiaFileViewer;component/Resources/ResourceDictionary.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+
+        <Border Style="{StaticResource UpperBorderStyle}"  Grid.Row="0"/>
+        <Border Style="{StaticResource InnerBorderStyle}"  Grid.Row="1"/>
+        <Border Style="{StaticResource BottomBorderStyle}"  Grid.Row="2">
+            <StackPanel Orientation="Horizontal">
+                <Button Style="{StaticResource IconicButtonFileOpenStyle}" Command="{Binding OpenFileDialogCommand}"/>
+                <Separator Style="{StaticResource VerticalSeparatorStyle}"/>
+                <Button  Style="{StaticResource IconicButtonSettingsStyle}"/>
+                <Button  Style="{StaticResource IconicButtonCompareStyle}"/>
+                <Button  Style="{StaticResource IconicButtonCsvExportStyle}"/>
+            </StackPanel>
+        </Border>
+
+        <ListBox Grid.Row="0"  x:Name="TypesListBox" Style="{StaticResource TypesListBoxStyle}"
+                 ItemsSource="{Binding ListOfItems}"
+                 ItemContainerStyle = "{StaticResource TypeItemStyle}"
+                 HorizontalContentAlignment="Center"
+                 SelectedValue ="{Binding SelectedTypeGroupItem, Mode=TwoWay}"
+                 Visibility="{Binding TypesVisibility}">
+            <ListBox.ItemTemplate>
+                 <DataTemplate>
+                     <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15" FontWeight="DemiBold">
+                         <TextBlock.Text >
+                             <MultiBinding StringFormat="{}{0} ({1})">
+                                 <Binding Path="Type" />
+                                 <Binding Path="Count" />
+                             </MultiBinding>
+                         </TextBlock.Text>
+                        </TextBlock>
+                 </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <ListBox Grid.Row="1"  x:Name="ElementsListBox" Style="{StaticResource ElementsListBoxStyle}" 
+                 ItemsSource="{Binding ListOfElements}"
+                 HorizontalContentAlignment="Left" 
+                 ItemContainerStyle = "{StaticResource NameItemStyle}"
+                 Visibility="{Binding ElementsVisibility}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15" FontWeight="DemiBold">
+                         <TextBlock.Text>
+                            <Binding/>
+                         </TextBlock.Text>
+                        </TextBlock>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+    </Grid>
+</UserControl>

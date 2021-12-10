@@ -1,0 +1,168 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d">
+        
+
+
+        <Style x:Key="UpperBorderStyle" TargetType="Border">
+            <Setter Property="Background" Value="LightGray"/>
+            <Setter Property="BorderBrush" Value="DimGray"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Height" Value="120"/>
+        </Style>
+
+        <Style x:Key="InnerBorderStyle" TargetType="Border">
+            <Setter Property="BorderBrush" Value="DimGray"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Height" Value="300"/>
+    </Style>
+
+    <Style x:Key="BottomBorderStyle" TargetType="Border">
+        <Setter Property="Background" Value="LightGray"/>
+        <Setter Property="BorderBrush" Value="DimGray"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Height" Value="60"/>
+    </Style>
+
+    <Style x:Key="TypeListBoxBorderStyle" TargetType="Border">
+        <Setter Property="Background" Value="WhiteSmoke"/>
+        <Setter Property="BorderBrush" Value="DimGray"/>
+        <Setter Property="BorderThickness" Value="1"/>
+    </Style>
+
+
+    <Style x:Key="VerticalSeparatorStyle" TargetType="Separator" BasedOn="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}">
+            <Setter Property="Background" Value="DimGray"/>
+        </Style>
+
+        <Style x:Key="IconicButtonStyle" TargetType="Button">
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="Background" Value="WhiteSmoke"/>
+        </Style>
+
+        <Style x:Key="IconicButtonCompareStyle" TargetType="Button" BasedOn="{StaticResource IconicButtonStyle}">
+            <Setter Property="ContentTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <Image Source="/TiaFileViewer;component/Resources/Icons/Compare.png"/>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="IconicButtonCsvExportStyle" TargetType="Button" BasedOn="{StaticResource IconicButtonStyle}">
+            <Setter Property="ContentTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                    <Image Source="/TiaFileViewer;component/Resources/Icons/CsvExport.png"/>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="IconicButtonFileOpenStyle" TargetType="Button" BasedOn="{StaticResource IconicButtonStyle}">
+            <Setter Property="ContentTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <Image Source="/TiaFileViewer;component/Resources/Icons/FileOpen.png"/>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="IconicButtonSettingsStyle" TargetType="Button" BasedOn="{StaticResource IconicButtonStyle}">
+            <Setter Property="ContentTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <Image Source="/TiaFileViewer;component/Resources/Icons/Settings.png"/>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="TypesListBoxStyle" TargetType="ListBox" >
+            <Setter Property="Margin" Value= "0,1,0,1"/>
+            <Setter Property="Height" Value= "120"/>
+            <Setter Property="VerticalAlignment" Value="Stretch"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <DockPanel>
+                            <RepeatButton x:Name="LineLeftButton" DockPanel.Dock="Left" Width="20" 
+                                          Command="{x:Static ScrollBar.LineLeftCommand}"      
+                                            CommandTarget="{Binding ElementName=scrollviewer}">
+                                <StackPanel>
+                                <Image Source = "/TiaFileViewer;component/Resources/Icons/LeftArrow.png" />
+                                </StackPanel>
+                            </RepeatButton>
+                            <RepeatButton x:Name="LineRightButton" DockPanel.Dock="Right" Width="20" 
+                                          Command="{x:Static ScrollBar.LineRightCommand}"      
+                                          CommandTarget="{Binding ElementName=scrollviewer}">
+                                <StackPanel>
+                                    <Image Source = "/TiaFileViewer;component/Resources/Icons/RightArrow.png" />
+                                </StackPanel>
+                            </RepeatButton>
+                        <Border Style="{StaticResource TypeListBoxBorderStyle}">
+                                <ScrollViewer x:Name="scrollviewer"
+                              HorizontalScrollBarVisibility="Hidden" 
+                              VerticalScrollBarVisibility="Disabled">
+                                    <ItemsPresenter >
+                                    </ItemsPresenter>
+                                </ScrollViewer>
+                            </Border>
+                        </DockPanel>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="ItemsPanel">
+                <Setter.Value>
+                    <ItemsPanelTemplate>
+                    <VirtualizingStackPanel Orientation="Horizontal"   />
+                    </ItemsPanelTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    <Style x:Key="ElementsListBoxStyle" TargetType="ListBox"  >
+        <Setter Property="Margin" Value= "0,1,0,1"/>
+        <Setter Property="Height" Value= "300"/>
+        <Setter Property="VerticalAlignment" Value="Stretch"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <DockPanel>
+                        <Border Style="{StaticResource TypeListBoxBorderStyle}">
+                        <ScrollViewer x:Name="scrollviewer"
+                                      HorizontalScrollBarVisibility="Hidden" 
+                                      VerticalScrollBarVisibility="Visible">
+                                <ItemsPresenter >
+                                </ItemsPresenter>
+                            </ScrollViewer>
+                        </Border>
+                    </DockPanel>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="ItemsPanel">
+            <Setter.Value>
+                <ItemsPanelTemplate>
+                    <VirtualizingStackPanel Orientation="Vertical" />
+                </ItemsPanelTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="TypeItemStyle" TargetType="{x:Type ListBoxItem}">
+        <Setter Property="Margin" Value="5"/>
+        <Setter Property="BorderBrush" Value="DarkGray"/>
+        <Setter Property="BorderThickness" Value="2"/>
+        <Setter Property="Height" Value="60"></Setter>
+        <Setter Property="Width" Value="180"></Setter>
+    </Style>
+
+    <Style x:Key="NameItemStyle" TargetType="{x:Type ListBoxItem}">
+        <Setter Property="Margin" Value="5"/>
+    </Style>
+
+</ResourceDictionary>
